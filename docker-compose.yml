@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: http_server
+    ports:
+      - "8080:8080/tcp"  # Porta para HTTP/1.1
+      - "4433:4433/udp"  # Porta para HTTP/3 (QUIC exige UDP)
+    networks:
+      - rede_testes
+    cap_add:
+      - NET_ADMIN # Permite o uso do 'tc' no container
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: http_client
+    depends_on:
+      - server
+    networks:
+      - rede_testes
+    cap_add:
+      - NET_ADMIN # Permite o uso do 'tc' no container
+    command: tail -f /dev/null # Mantém o container do cliente vivo para rodarmos scripts nele
+
+networks:
+  rede_testes:
+    driver: bridge
