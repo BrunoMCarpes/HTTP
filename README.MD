@@ -25,23 +25,23 @@ As tecnologias adotadas são:
 * **Análise de Dados:** Pandas
 
 #1. Carregue o módulo de emulação de rede (uma vez por boot da máquina)
-```
-bashsudo modprobe sch_netem
+```bash
+sudo modprobe sch_netem
 ```
 #2. Construa a imagem Docker
-```
-bashmake build
+```bash
+make build
 ```
 
 #3. Teste rápido (sanidade) — sobe o servidor e faz uma medição
-```
-bashexport NETEM="delay 25ms loss 1%"
+```bash
+export NETEM="delay 25ms loss 1%"
 make down && make up
 make warm
 ```
 #4. Rodada completa que salva os dados e gera os gráficos
-```
-bashexport NETEM="delay 25ms loss 1%"
+```bash
+export NETEM="delay 25ms loss 1%"
 make down && make up && make bench
 
 export NETEM="delay 100ms loss 5%"
@@ -50,7 +50,7 @@ make down && make up && make bench
 make plot
 ```
 #5 Encerrar
-```
-bashmake down
+```bash
+make down
 ```
 
