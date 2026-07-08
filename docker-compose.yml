@@ -1,0 +1,41 @@
+# Sobe um servidor (HTTP/1.1 + HTTP/3) e um cliente na mesma rede bridge.
+# O tráfego cruza a rede entre contêineres, então o `tc netem` afeta as
+# medições de verdade (ao contrário do loopback).
+#
+# Variáveis (via ambiente ou arquivo .env):
+#   NETEM   -> ex.: "delay 25ms loss 1%"   (padrao: vazio = rede perfeita)
+#   PAYLOAD -> bytes do corpo da resposta   (padrao: 1024)
+
+services:
+  server:
+    build: .
+    hostname: server
+    networks: [benchnet]
+    cap_add: ["NET_ADMIN"]
+    environment:
+      - NETEM=${NETEM:-}
+    command: python server.py --host 0.0.0.0 --port 8443 --payload ${PAYLOAD:-1024}
+    # publica no host apenas para depuracao manual (opcional):
+    ports:
+      - "8443:8443/tcp"
+      - "8443:8443/udp"
+
+  # Servico de "one-off": rode com `docker compose run --rm client <comando>`.
+  client:
+    build: .
+    depends_on: [server]
+    networks: [benchnet]
+    cap_add: ["NET_ADMIN"]
+    environment:
+      - NETEM=${NETEM:-}
+    # pasta compartilhada com o host: resultados (.jsonl) e graficos (.png)
+    volumes:
+      - ./results:/app/results
+    # comando padrao; normalmente sobrescrito na linha de comando
+    command: >
+      python bench.py --proto h3 --host server --port 8443
+      -n 1000 --mode warm --insecure
+
+networks:
+  benchnet:
+    driver: bridge

@@ -1,0 +1,15 @@
+# resultados e artefatos gerados (regeneraveis com `make bench` / `make plot`)
+results/
+
+# certificados locais (gerados no build da imagem)
+cert.pem
+key.pem
+
+# python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# artefatos de render
+*.pdf
