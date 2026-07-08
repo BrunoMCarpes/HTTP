@@ -9,14 +9,8 @@ Cenários suportados (--mode):
 Uso:
     python bench.py --proto h11 --host localhost --port 8443 -n 1000 --mode warm
     python bench.py --proto h3  --host localhost --port 8443 -n 1000 --mode warm
-
-Dica: rode SEMPRE sob `tc netem` (latência/perda). Em loopback perfeito
-o resultado é enganoso — veja README.md.
-
-NOTA: este é um scaffold. O cliente HTTP/3 segue o padrão canônico da
-aioquic (subclasse de QuicConnectionProtocol + H3Connection). Valide contra
-sua versão da aioquic antes de tirar conclusões.
 """
+
 import argparse
 import asyncio
 import json
@@ -94,10 +88,7 @@ async def bench_h3(host, port, path, n, mode, insecure):
     lats = []
 
     if mode == "cold":
-        # conexão nova por requisição -> mede handshake QUIC + 1a resposta.
-        # IMPORTANTE: o cronômetro para DENTRO do bloco, antes do teardown,
-        # porque o fechamento da conexão na aioquic tem uma espera fixa que
-        # nao faz parte do custo de estabelecer a conexao.
+        
         for _ in range(n):
             t0 = time.perf_counter()
             async with connect(host, port,
@@ -160,9 +151,9 @@ async def bench_h11(host, port, path, n, mode, insecure):
     return lats
 
 
-# ==========================================================================
+
 # Relatório
-# ==========================================================================
+
 def _pct(ms, p):
     if len(ms) == 1:
         return ms[0]

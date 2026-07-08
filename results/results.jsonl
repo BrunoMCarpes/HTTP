@@ -1,0 +1,8 @@
+{"proto": "h11", "mode": "warm", "netem": "delay 25ms loss 1%", "n": 1000, "mean": 60.047, "p50": 52.217, "p95": 53.098, "p99": 405.277, "max": 671.878}
+{"proto": "h3", "mode": "warm", "netem": "delay 25ms loss 1%", "n": 1000, "mean": 54.731, "p50": 51.538, "p95": 52.127, "p99": 180.626, "max": 370.241}
+{"proto": "h11", "mode": "cold", "netem": "delay 25ms loss 1%", "n": 200, "mean": 185.946, "p50": 157.105, "p95": 314.006, "p99": 1168.296, "max": 1174.59}
+{"proto": "h3", "mode": "cold", "netem": "delay 25ms loss 1%", "n": 200, "mean": 120.122, "p50": 109.531, "p95": 168.168, "p99": 311.141, "max": 536.83}
+{"proto": "h11", "mode": "concurrent", "netem": "delay 25ms loss 1%", "n": 500, "batch_ms": 3189.952}
+{"proto": "h3", "mode": "concurrent", "netem": "delay 25ms loss 1%", "n": 500, "batch_ms": 1919.156}
+{"proto": "h11", "mode": "warm", "netem": "delay 100ms loss 5%", "n": 1000, "mean": 273.813, "p50": 202.561, "p95": 857.05, "p99": 885.725, "max": 1554.308}
+{"proto": "h3", "mode": "warm", "netem": "delay 100ms loss 5%", "n": 1000, "mean": 257.801, "p50": 201.87, "p95": 631.532, "p99": 858.41, "max": 2002.488}

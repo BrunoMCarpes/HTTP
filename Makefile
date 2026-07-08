@@ -1,5 +1,5 @@
 # Atalhos para rodar o benchmark via Docker.
-#
+
 # Fluxo tipico (gera graficos no final):
 #   make build
 #   export NETEM="delay 25ms loss 1%"
@@ -7,8 +7,8 @@
 #   export NETEM="delay 100ms loss 5%"
 #   make down && make up && make bench
 #   make plot
-#
-# Os graficos saem em results/*.png
+
+
 
 NETEM   ?=
 PAYLOAD ?= 1024
@@ -47,7 +47,7 @@ concurrent:
 
 all: warm cold concurrent
 
-# --- rodada que SALVA os resultados para gerar graficos -------------------
+# rodada que SALVA os resultados para gerar graficos
 # roda os 3 modos nos 2 protocolos e acrescenta tudo em results/results.jsonl
 bench:
 	@mkdir -p results

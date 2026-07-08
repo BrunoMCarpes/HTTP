@@ -1,0 +1,9 @@
+netem,mode,proto,mean,p50,p95,p99,max,batch_ms,req_s
+delay 100ms loss 5%,warm,h11,273.81,202.56,857.05,885.72,1554.31,,
+delay 100ms loss 5%,warm,h3,257.8,201.87,631.53,858.41,2002.49,,
+delay 25ms loss 1%,cold,h11,185.95,157.1,314.01,1168.3,1174.59,,
+delay 25ms loss 1%,cold,h3,120.12,109.53,168.17,311.14,536.83,,
+delay 25ms loss 1%,concurrent,h11,,,,,,3189.95,156.74
+delay 25ms loss 1%,concurrent,h3,,,,,,1919.16,260.53
+delay 25ms loss 1%,warm,h11,60.05,52.22,53.1,405.28,671.88,,
+delay 25ms loss 1%,warm,h3,54.73,51.54,52.13,180.63,370.24,,
