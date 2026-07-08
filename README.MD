@@ -27,7 +27,7 @@ As tecnologias adotadas são:
 #1. Carregue o módulo de emulação de rede (uma vez por boot da máquina)
 '''bash
 bashsudo modprobe sch_netem
-'''
+```
 #2. Construa a imagem Docker
 '''bash
 bashmake build
