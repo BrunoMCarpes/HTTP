@@ -28,13 +28,16 @@ As tecnologias adotadas são:
 bashsudo modprobe sch_netem
 
 #2. Construa a imagem Docker
+```bash
 bashmake build
+```
 
 #3. Teste rápido (sanidade) — sobe o servidor e faz uma medição
+'''bash
 bashexport NETEM="delay 25ms loss 1%"
 make down && make up
 make warm
-
+'''
 #4. Rodada completa que salva os dados e gera os gráficos
 bashexport NETEM="delay 25ms loss 1%"
 make down && make up && make bench
